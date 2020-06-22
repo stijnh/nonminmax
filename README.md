@@ -1,5 +1,10 @@
 # Integers types which cannot be their minimum/maximum value.
 
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/stijnh/nonminmax/Rust)
+[![Crates.io](https://img.shields.io/crates/v/nonminmax)](https://crates.io/crates/nonminmax)
+[![Rustdoc](https://docs.rs/mio/badge.svg)](https://docs.rs/nonminmax/)
+[![GitHub](https://img.shields.io/github/license/stijnh/nonminmax)](https://github.com/stijnh/nonminmax)
+
 The standard library contains a collection of `std::num::NonZeroX` types: integer types which
 cannot be zero. This crate extends this idea further by providing `NonMinX`/`NonMaxX`: integer
 types which cannot be their minimum/maximum value.
