@@ -56,11 +56,16 @@ time `get` is called.
 
 # Supported types
 The following types are supported
-- `i8`/`u8`
-- `i16`/`u16`
-- `i32`/`u32`
-- `i64`/`u64`
-- `i128` / `u128`
-- `isize` / `usize`
-
+- `i8`: `NonMinI8`, `NonMaxI8`
+- `i16`: `NonMinI16`, `NonMaxI16`
+- `i32`: `NonMinI32`, `NonMaxI32`
+- `i64`: `NonMinI64`, `NonMaxI64`
+- `i128`: `NonMinI128`, `NonMaxI128`
+- `isize`: `NonMinIsize`, `NonMaxIsize`
+- `u8`: `NonMaxU8`
+- `u16`: `NonMaxU16`
+- `u32`: `NonMaxU32`
+- `u64`: `NonMaxU64`
+- `u128`: `NonMaxU128`
+- `usize`: `NonMaxUsize`
 
