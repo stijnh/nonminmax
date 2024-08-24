@@ -110,7 +110,7 @@ macro_rules! impl_nontype {
             assert_eq!(size_of::<", stringify!($prim) ,">(), size_of::<Option<", stringify!($struct) ,">>());
             ```",
             ),
-            #[derive(Clone, Copy, Eq, PartialEq, Ord, PartialOrd, Hash)]
+            #[derive(Clone, Copy, PartialEq, Eq, Hash)]
             #[repr(transparent)]
             pub struct $struct {
                 value: $nonzero,
@@ -152,6 +152,18 @@ macro_rules! impl_nontype {
         impl From<$struct> for $prim {
             fn from(nontype: $struct) -> Self {
                 nontype.get()
+            }
+        }
+
+        impl PartialOrd for $struct {
+            fn partial_cmp(&self, other: &Self) -> Option<core::cmp::Ordering> {
+                self.get().partial_cmp(&other.get())
+            }
+        }
+
+        impl Ord for $struct {
+            fn cmp(&self, other: &Self) -> core::cmp::Ordering {
+                self.get().cmp(&other.get())
             }
         }
 
@@ -219,6 +231,15 @@ mod tests {
                 assert_eq!(size_of::<$struct>(), size_of::<$prim>());
                 assert_eq!(size_of::<Option<$struct>>(), size_of::<$prim>());
                 assert_eq!(size_of::<Result<$struct, ()>>(), size_of::<$prim>());
+
+                // test equality
+                assert_eq!(x, x);
+                assert_ne!(x, $struct::new(42).unwrap());
+
+                // test order
+                assert!(x <= x);
+                assert!(!(x < x));
+                assert!($struct::new(1).unwrap() < $struct::new(2).unwrap());
             }
         };
     }
